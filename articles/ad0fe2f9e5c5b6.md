@@ -28,7 +28,7 @@ JOIN customers c
 
 この場合、通常は小さい方のテーブル（customers）がハッシュ化され、大きなテーブル（orders）と照合されます。
 
-![ハッシュジョインの図解](https://raw.githubusercontent.com/t-xxx/zenn-articles/main/images/hash_join.png)
+![ハッシュジョインの図解](https://raw.githubusercontent.com/t-xxx/zenn-articles/main/images/hash_join_diagram.drawio.png)
 
 - Build phase：小さいテーブル (customers) をハッシュテーブルにする
 - Probe phase：大きいテーブル (orders) の行を1つずつ走査して一致するキーを探す
@@ -58,7 +58,7 @@ WHERE c.country = 'Japan';
 
 この場合、customers テーブルに country = 'Japan' のフィルタが効いていれば、Snowflakeは以下のように処理します：
 
-![プルーニングとハッシュジョインの図解](https://raw.gihubusercontent.com/t-xxx/zenn-articles/main/images/pruning_hash_join_diagram.drawio.png)
+![プルーニングとハッシュジョインの図解](https://raw.githubusercontent.com/t-xxx/zenn-articles/main/images/pruning_hash_join_diagram.drawio.png)
 
 これにより、不要なデータのスキャンを抑制しつつ、メモリ効率も向上します。
 
@@ -84,6 +84,6 @@ WHERE o.order_date >= CURRENT_DATE - INTERVAL '7 days';
 - フィルタ条件にリテラル値を使う（または定数に近い式）
 - ビューやCTE内で複雑な計算をしない：オプティマイザが正しくプルーニングできるようにする
 
-##まとめ
+## まとめ
 
 Snowflakeにおけるパフォーマンスチューニングは、単体の技術というよりもハッシュジョイン × プルーニングなど、複数の技術の連携で成立しています。クエリパフォーマンスが思わしくない時は、Explain PlanやQuery Profileを確認し、これらの技術が期待通りに使われているかをチェックしましょう。
