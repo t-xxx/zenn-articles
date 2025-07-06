@@ -1,8 +1,8 @@
 ---
 title: "ハッシュジョインにおけるマイクロパーティションプルーニングの注意"
 emoji: ""
-type: "snowflake"
-topics: []
+type: "tech"
+topics: ["snowflake"]
 published: false
 ---
 
